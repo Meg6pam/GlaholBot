@@ -1,0 +1,22 @@
+com/github/meg6pam/AlinkaBot/telegram/util/Utils.java
+ com.github.meg6pam.AlinkaBot.telegram.util.Utils
+com/github/meg6pam/AlinkaBot/telegram/command/service/HelpCommand.java
+ com.github.meg6pam.AlinkaBot.telegram.command.service.HelpCommand
+com/github/meg6pam/AlinkaBot/AlinkaBotApplication.java
+ com.github.meg6pam.AlinkaBot.AlinkaBotApplication
+com/github/meg6pam/AlinkaBot/telegram/NonCommand.java
+ com.github.meg6pam.AlinkaBot.telegram.NonCommand
+com/github/meg6pam/AlinkaBot/telegram/command/service/ServiceCommand.java
+ com.github.meg6pam.AlinkaBot.telegram.command.service.ServiceCommand
+com/github/meg6pam/AlinkaBot/telegram/command/operation/OperationCommand.java
+ com.github.meg6pam.AlinkaBot.telegram.command.operation.OperationCommand
+com/github/meg6pam/AlinkaBot/model/Task.java
+ com.github.meg6pam.AlinkaBot.model.Task
+com/github/meg6pam/AlinkaBot/telegram/Bot.java
+ com.github.meg6pam.AlinkaBot.telegram.Bot
+com/github/meg6pam/AlinkaBot/model/Recipient.java
+ com.github.meg6pam.AlinkaBot.model.Recipient
+com/github/meg6pam/AlinkaBot/telegram/command/service/StartCommand.java
+ com.github.meg6pam.AlinkaBot.telegram.command.service.StartCommand
+com/github/meg6pam/AlinkaBot/telegram/util/DatabaseManager.java
+ com.github.meg6pam.AlinkaBot.telegram.util.DatabaseManager

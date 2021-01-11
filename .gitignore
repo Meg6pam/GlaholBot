@@ -1,0 +1,15 @@
+.gradle
+
+.idea/
+.build/
+
+.idea/httpRequests/*
+
+*.jfr
+*.iml
+*.gz
+
+/out/
+/gradle/
+
+*.log
