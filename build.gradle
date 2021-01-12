@@ -1,11 +1,15 @@
 plugins {
     id 'java'
+    id 'com.google.cloud.tools.appengine' version '2.4.1'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
+    maven {
+        url 'https://repo1.maven.org/maven2/'
+    }
     mavenCentral()
 }
 
