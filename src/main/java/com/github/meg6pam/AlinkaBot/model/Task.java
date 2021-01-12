@@ -1,11 +1,39 @@
 package com.github.meg6pam.AlinkaBot.model;
 
+import java.time.LocalDateTime;
+
 public class Task {
     private Long id;
-    private String recipient;
     private String type;
     private String message;
-    private String fileUri;
+    private String fileId;
+    private String status;
+    private Integer authorId;
+    private LocalDateTime creationDate;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public Long getId() {
         return id;
@@ -13,14 +41,6 @@ public class Task {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
     }
 
     public String getType() {
@@ -39,22 +59,24 @@ public class Task {
         this.message = message;
     }
 
-    public String getFileUri() {
-        return fileUri;
+    public String getFileId() {
+        return fileId;
     }
 
-    public void setFileUri(String fileUri) {
-        this.fileUri = fileUri;
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 
     @Override
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", recipient='" + recipient + '\'' +
                 ", type='" + type + '\'' +
                 ", message='" + message + '\'' +
-                ", fileUri='" + fileUri + '\'' +
+                ", fileId='" + fileId + '\'' +
+                ", status='" + status + '\'' +
+                ", authorId=" + authorId +
+                ", creationDate=" + creationDate +
                 '}';
     }
 }

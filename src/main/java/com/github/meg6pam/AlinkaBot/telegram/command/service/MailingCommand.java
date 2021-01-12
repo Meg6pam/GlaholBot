@@ -18,13 +18,13 @@ public class MailingCommand extends ServiceCommand {
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        if (DatabaseManager.getUncompletedTasks(user) == null) {
+        if (DatabaseManager.getUncompletedTasks(user) != null) {
             sendResponse(absSender, chat.getId(), this.getCommandIdentifier(), user.getUserName(),
-                    "У тебя есть незавершённая рассылка! Введи /delete чтобы удалить её, или /exec чтобы выполнить");
+                    "У тебя есть незавершённая рассылка! Введи /cancel чтобы удалить её, или /push чтобы отправить");
         } else {
-            DatabaseManager.newTask("Simple Task", user.getId());
+            DatabaseManager.newTask("SIMPLE", user.getId());
             sendResponse(absSender, chat.getId(), this.getCommandIdentifier(), user.getUserName(),
-                    "Я создал пустую рассылку для тебя. Пришли мне текст и файлы, которые я должен разослать");
+                    "Я создал пустую рассылку для тебя. Пришли мне текст и файлы, которые я должен разослать. Когда закончишь - введи /push");
         }
     }
 }

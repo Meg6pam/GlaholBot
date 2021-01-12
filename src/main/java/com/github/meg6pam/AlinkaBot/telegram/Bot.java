@@ -1,7 +1,10 @@
 package com.github.meg6pam.AlinkaBot.telegram;
 
+import com.github.meg6pam.AlinkaBot.telegram.command.service.CancelCommand;
 import com.github.meg6pam.AlinkaBot.telegram.command.service.HelpCommand;
 import com.github.meg6pam.AlinkaBot.telegram.command.service.MailingCommand;
+import com.github.meg6pam.AlinkaBot.telegram.command.service.PushCommand;
+import com.github.meg6pam.AlinkaBot.telegram.command.service.SendCommand;
 import com.github.meg6pam.AlinkaBot.telegram.command.service.StartCommand;
 import com.github.meg6pam.AlinkaBot.telegram.util.DatabaseManager;
 import com.github.meg6pam.AlinkaBot.telegram.util.Utils;
@@ -38,6 +41,12 @@ public final class Bot extends TelegramLongPollingCommandBot {
         logger.debug("Команда help создана");
         register(new MailingCommand("mailing","Рассылка"));
         logger.debug("Команда mailing создана");
+        register(new PushCommand("push","отправить"));
+        logger.debug("Команда push создана");
+        register(new SendCommand("send", "готово"));
+        logger.debug("Команда send создана");
+        register(new CancelCommand("cancel","отмена"));
+        logger.debug("Команда cancel создана");
         logger.info("Бот создан!");
     }
 
@@ -51,13 +60,13 @@ public final class Bot extends TelegramLongPollingCommandBot {
         Message msg = update.getMessage();
         Long chatId = msg.getChatId();
         String userName = Utils.getUserName(msg);
-
+        String answer;
         if (DatabaseManager.getUserRole(userName).equals("ADMIN")) {
-            adminCommand.handleUpdate(update);
+            answer = adminCommand.handleUpdate(update);
         } else {
-            String answer = nonCommand.execute(chatId, userName, msg.getText());
-            setAnswer(chatId, userName, answer);
+            answer = nonCommand.execute(chatId, userName, msg.getText());
         }
+            setAnswer(chatId, userName, answer);
     }
 
     @Override
