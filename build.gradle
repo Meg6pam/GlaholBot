@@ -8,11 +8,15 @@ jar {
                 'Main-Class': 'com.github.meg6pam.alinkabot.AlinkaBotApplication'
         )
     }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
 }
 group 'org.example'
 version '1.0-SNAPSHOT'
-sourceCompatibility = 1.9
-targetCompatibility = 1.9
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 repositories {
     maven {
         url 'https://repo1.maven.org/maven2/'
@@ -20,10 +24,10 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation 'org.telegram:telegrambots:5.0.1'
-    implementation 'org.telegram:telegrambotsextensions:5.0.1'
-    implementation 'com.guicedee.services:sl4j:1.0.13.5'
-    implementation 'org.postgresql:postgresql:42.2.18'
+    compile 'org.telegram:telegrambots:5.0.1'
+    compile 'org.telegram:telegrambotsextensions:5.0.1'
+    compile 'com.guicedee.services:sl4j:1.0.13.5'
+    compile 'org.postgresql:postgresql:42.2.18'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
