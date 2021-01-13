@@ -3,15 +3,6 @@ env: flex
 manual_scaling:
   instances: 1
 
-handlers:
-  - url: /.*
-    script: this field is required, but ignored
-    secure: always
-
-runtime_config:  # Optional
-  jdk: openjdk9
-  #server: jetty9
-
 resources:
   cpu: 0.5
   memory_gb: 0.5
