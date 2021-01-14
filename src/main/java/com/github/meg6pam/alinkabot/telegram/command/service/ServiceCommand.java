@@ -20,7 +20,7 @@ public abstract class ServiceCommand extends BotCommand {
 
     public void sendResponse(AbsSender absSender, Long chatId, String commandName, String username, String message) {
         SendMessage sendMessage = new SendMessage();
-        sendMessage.enableMarkdown(true);
+        sendMessage.enableMarkdown(false);
         sendMessage.setChatId(chatId.toString());
         sendMessage.setText(message);
         try {
