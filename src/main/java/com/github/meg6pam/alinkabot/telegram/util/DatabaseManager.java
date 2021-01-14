@@ -4,8 +4,6 @@ import com.github.meg6pam.alinkabot.enums.TaskStatus;
 import com.github.meg6pam.alinkabot.model.Recipient;
 import com.github.meg6pam.alinkabot.model.Task;
 import org.postgresql.ds.PGSimpleDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.sql.Connection;
@@ -18,7 +16,7 @@ import java.util.Optional;
 
 public class DatabaseManager {
 
-    private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
+//    private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
 
     private static final String dblogin = System.getenv("DB_LOGIN");
     private static final String dbpassword = System.getenv("DB_PASSWORD");
@@ -51,10 +49,10 @@ public class DatabaseManager {
                             " VALUES (%s, %s, %s, %b, %s, %s, DEFAULT, %s, %s)",
                     username, firstname, lastname, isBot, telephone, email, role, description);
             statement.executeUpdate(query);
-            logger.trace("New User added to database {}", recipient);
+//            logger.trace("New User added to database {}", recipient);
         } catch (SQLException throwables) {
-            logger.error("Can't add User to database {}", recipient);
-            throwables.printStackTrace();
+//            logger.error("Can't add User to database {}", recipient);
+//            throwables.printStackTrace();
         }
     }
 
@@ -73,9 +71,9 @@ public class DatabaseManager {
                             " VALUES (%d, %s, %s, %s, %b, DEFAULT, DEFAULT, %d) ON CONFLICT (id) DO NOTHING",
                     user.getId(), username, firstname, lastname, isBot, chatId);
             statement.executeUpdate(query);
-            logger.trace("New User added to database {}", user);
+//            logger.trace("New User added to database {}", user);
         } catch (SQLException throwables) {
-            logger.error("Can't add User to database {}", user);
+//            logger.error("Can't add User to database {}", user);
             throwables.printStackTrace();
         }
     }
@@ -92,7 +90,7 @@ public class DatabaseManager {
                 role = resultSet.getString(1);
             }
         } catch (SQLException throwables) {
-            logger.error("Can't get Role from database for user {}", user.getUserName());
+//            logger.error("Can't get Role from database for user {}", user.getUserName());
             throwables.printStackTrace();
         }
         return role;
@@ -110,7 +108,7 @@ public class DatabaseManager {
                 role = resultSet.getString(1);
             }
         } catch (SQLException throwables) {
-            logger.error("Can't get Role from database for user {}", userName);
+//            logger.error("Can't get Role from database for user {}", userName);
             throwables.printStackTrace();
         }
         return role;
@@ -129,7 +127,7 @@ public class DatabaseManager {
             }
             return null;
         } catch (SQLException throwables) {
-            logger.error("Can't get Role from database for user {}", user.getUserName());
+//            logger.error("Can't get Role from database for user {}", user.getUserName());
             throwables.printStackTrace();
         }
         return taskId;
@@ -147,7 +145,7 @@ public class DatabaseManager {
                 taskId = resultSet.getLong(1);
             }
         } catch (SQLException throwables) {
-            logger.error("Can't get last Task from database");
+//            logger.error("Can't get last Task from database");
             throwables.printStackTrace();
         }
         return Optional.ofNullable(taskId);
@@ -161,7 +159,7 @@ public class DatabaseManager {
             String query = String.format("INSERT INTO tasks (type, status, author, creation_date) VALUES ('%s', 'DRAFT', %d, DEFAULT)", type, authorUserId);
             statement.executeUpdate(query);
         } catch (SQLException throwables) {
-            logger.error("Can't add new Task with type {} for user with id {} to database ", type, authorUserId, throwables);
+//            logger.error("Can't add new Task with type {} for user with id {} to database ", type, authorUserId, throwables);
             throwables.printStackTrace();
         }
     }
@@ -174,7 +172,7 @@ public class DatabaseManager {
             String query = String.format("UPDATE tasks SET file_id = '%s' WHERE id = %d ", fileId, taskId);
             statement.executeUpdate(query);
         } catch (SQLException throwables) {
-            logger.error("Can't set new file_id {} for task with id {} to database ", fileId, taskId);
+//            logger.error("Can't set new file_id {} for task with id {} to database ", fileId, taskId);
             throwables.printStackTrace();
         }
     }
@@ -187,7 +185,7 @@ public class DatabaseManager {
             String query = String.format("UPDATE tasks SET message = '%s' WHERE id = %s ", message, taskId);
             statement.executeUpdate(query);
         } catch (SQLException throwables) {
-            logger.error("Can't set new message {} for task with id {} to database ", message, taskId);
+//            logger.error("Can't set new message {} for task with id {} to database ", message, taskId);
             throwables.printStackTrace();
         }
     }
@@ -219,7 +217,7 @@ public class DatabaseManager {
                 task.setCreationDate(resultSet.getTimestamp(7).toLocalDateTime());
             }
         } catch (SQLException throwables) {
-            logger.error("Can't get last Task from database ");
+//            logger.error("Can't get last Task from database ");
             throwables.printStackTrace();
         }
         return task;
@@ -233,7 +231,7 @@ public class DatabaseManager {
             String query = String.format("UPDATE tasks SET status = '%s' WHERE id = %d ", status, taskId);
             statement.executeUpdate(query);
         } catch (SQLException throwables) {
-            logger.error("Can't set new file_id {} for task with id {} to database ", status, taskId);
+//            logger.error("Can't set new file_id {} for task with id {} to database ", status, taskId);
             throwables.printStackTrace();
         }
     }
@@ -250,7 +248,7 @@ public class DatabaseManager {
                 chatIds.add(resultSet.getLong(1));
             }
         } catch (SQLException throwables) {
-            logger.error("Can't get all chat_id from database");
+//            logger.error("Can't get all chat_id from database");
             throwables.printStackTrace();
         }
         return chatIds;
@@ -264,7 +262,7 @@ public class DatabaseManager {
             String query = String.format("DELETE FROM tasks WHERE author = %d ", authorId);
             statement.executeUpdate(query);
         } catch (SQLException throwables) {
-            logger.error("Can't delete task with status 'DRAFT' or 'READY' by author {}", authorId);
+//            logger.error("Can't delete task with status 'DRAFT' or 'READY' by author {}", authorId);
             throwables.printStackTrace();
         }
     }
