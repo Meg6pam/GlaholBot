@@ -23,7 +23,7 @@ public class HelpCommand extends ServiceCommand {
         logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
         sendResponse(absSender, chat.getId(), this.getCommandIdentifier(), userName,
-                "Я бот Алины Пешкиной.");
+                "Если у тебя возникнут сложности или вопросы по марафону, пиши в службу заботы  \uD83E\uDD70  @a_peshkina");
         logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
     }

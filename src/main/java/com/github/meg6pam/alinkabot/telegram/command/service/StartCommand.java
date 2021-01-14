@@ -21,6 +21,17 @@ public class StartCommand extends ServiceCommand {
         //обращаемся к методу суперкласса для отправки пользователю ответа
         DatabaseManager.addUser(user, chat.getId());
         sendResponse(absSender, chat.getId(), this.getCommandIdentifier(), userName,
-                "Давайте начнём! Если Вам нужна помощь, нажмите /help");
+                "Круто! Ты зарегистрировался на марафон-практикум Кристины Эйприл!\n" +
+                        "\n" +
+                        "Впереди тебя ждёт 3 живых вебинара 19, 20 и 21 января \uD83D\uDD25\n" +
+                        "\n" +
+                        "Переходи по ссылке и подписывайся на канал. Там будет основная движуха! \n" +
+                        "\n" +
+                        "\uD83D\uDC49 @chabrechnaya_1\n" +
+                        "\n" +
+                        "\uD83C\uDF7F Бот — для ссылок на вебинары\n" +
+                        "\uD83D\uDCFAКанал — расписание марафона и полезные материалы.\n" +
+                        "\n" +
+                        "Обязательно, подпишись \uD83D\uDC49 @chabrechnaya_1");
     }
 }
