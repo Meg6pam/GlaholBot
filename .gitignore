@@ -13,3 +13,4 @@
 /gradle/
 
 *.log
+src/main/appengine/app.yaml

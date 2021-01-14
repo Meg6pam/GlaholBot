@@ -4,8 +4,8 @@ com/github/meg6pam/alinkabot/telegram/command/service/CancelCommand.java
  com.github.meg6pam.alinkabot.telegram.command.service.CancelCommand
 com/github/meg6pam/alinkabot/enums/TaskStatus.java
  com.github.meg6pam.alinkabot.enums.TaskStatus
-com/github/meg6pam/alinkabot/AlinkaBotApplication.java
- com.github.meg6pam.alinkabot.AlinkaBotApplication
+com/github/meg6pam/alinkabot/telegram/AdminCommand.java
+ com.github.meg6pam.alinkabot.telegram.AdminCommand
 com/github/meg6pam/alinkabot/telegram/command/service/SendCommand.java
  com.github.meg6pam.alinkabot.telegram.command.service.SendCommand
 com/github/meg6pam/alinkabot/telegram/command/service/MailingCommand.java
@@ -32,5 +32,5 @@ com/github/meg6pam/alinkabot/telegram/util/Utils.java
  com.github.meg6pam.alinkabot.telegram.util.Utils
 com/github/meg6pam/alinkabot/telegram/command/operation/OperationCommand.java
  com.github.meg6pam.alinkabot.telegram.command.operation.OperationCommand
-com/github/meg6pam/alinkabot/telegram/AdminCommand.java
- com.github.meg6pam.alinkabot.telegram.AdminCommand
+com/github/meg6pam/alinkabot/AlinkaBotApplication.java
+ com.github.meg6pam.alinkabot.AlinkaBotApplication
