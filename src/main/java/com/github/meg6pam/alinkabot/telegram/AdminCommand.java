@@ -20,7 +20,7 @@ public class AdminCommand {
                     // Get largest photo's file_id
                     String f_id = photos.stream()
                             .max(Comparator.comparing(PhotoSize::getFileSize))
-                            .orElseThrow().getFileId();
+                            .orElseThrow(() -> {return new RuntimeException();}).getFileId();
                     DatabaseManager.setTaskFileId(taskId, f_id);
                     DatabaseManager.setTaskStatus(taskId, TaskStatus.READY);
                     return "Добавил фотку в рассылку";
