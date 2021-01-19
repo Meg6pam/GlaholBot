@@ -29,7 +29,7 @@ public class PushCommand extends ServiceCommand {
                     sendResponse(absSender, chat.getId(), this.getCommandIdentifier(), user.getUserName(),
                             "Сейчас я пришлю тебе что получилось. Если тебе нравится - нажми /send, если нет - " +
                                     "просто пришли новые файлы, или медиаконтент и он заменит существующий. " +
-                                    "Если тебе не нравится ничего - введи /delete и начнём с начала!");
+                                    "Если тебе не нравится ничего - введи /cancel и начнём с начала!");
                     if (task.getFileId() != null) {
                         DatabaseManager.setTaskStatus(task.getId(), TaskStatus.READY);
                         SendPhoto msg = new SendPhoto();

@@ -3,7 +3,7 @@ package com.github.meg6pam.alinkabot.model;
 import java.time.LocalDateTime;
 
 public class Task {
-    private Long id;
+    private Integer id;
     private String type;
     private String message;
     private String fileId;
@@ -35,11 +35,11 @@ public class Task {
         this.creationDate = creationDate;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

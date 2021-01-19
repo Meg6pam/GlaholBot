@@ -6,7 +6,7 @@ public class NonCommand {
         String response;
         //TODO Обрабатываем запрос
         //TODO Логируем событие
-        return String.format("Запрос %s получен. Всё работает", request);
+        return "";
     }
 
 

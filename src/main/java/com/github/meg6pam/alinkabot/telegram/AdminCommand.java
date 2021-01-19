@@ -13,8 +13,8 @@ public class AdminCommand {
     public String handleUpdate(Update update) {
         if (update.hasMessage()) {
             if (update.getMessage().hasPhoto()) {
-                Long taskId;
-                if ((taskId = DatabaseManager.getLastTaskId().orElse(-1L)) != -1L) {
+                Integer taskId;
+                if ((taskId = DatabaseManager.getLastTaskId().orElse(-1)) != -1) {
                     // Array with photos
                     List<PhotoSize> photos = update.getMessage().getPhoto();
                     // Get largest photo's file_id
@@ -29,8 +29,8 @@ public class AdminCommand {
                 }
             }
             if (update.getMessage().hasText()) {
-                Long taskId;
-                if ((taskId = DatabaseManager.getLastTaskId().orElse(-1L)) != -1L) {
+                Integer taskId;
+                if ((taskId = DatabaseManager.getLastTaskId().orElse(-1)) != -1) {
                     DatabaseManager.setTaskMessage(taskId, update.getMessage().getText());
                     DatabaseManager.setTaskStatus(taskId, TaskStatus.READY);
                     return "Добавил текст в рассылку";

@@ -19,7 +19,9 @@ public class StartCommand extends ServiceCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
         String userName = Utils.getUserName(user);
         //обращаемся к методу суперкласса для отправки пользователю ответа
-        DatabaseManager.addUser(user, chat.getId());
+        if (DatabaseManager.addUser(user, chat.getId()) != 0) {
+            DatabaseManager.addAllTasksToUser(user.getId());
+        }
         sendResponse(absSender, chat.getId(), this.getCommandIdentifier(), userName,
                 "Круто! Ты зарегистрировался на марафон-практикум Кристины Эйприл!\n" +
                         "\n" +

@@ -11,7 +11,9 @@ public class AlinkaBotApplication {
     public static void main(String[] args) {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new Bot(BOT_USERNAME, BOT_TOKEN));
+            Bot bot = new Bot(BOT_USERNAME, BOT_TOKEN);
+            botsApi.registerBot(bot);
+            bot.handleJobs();
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
