@@ -1,5 +1,5 @@
 package com.github.meg6pam.alinkabot.enums;
 
-public enum TaskStatus {
+public enum Status {
     DRAFT, READY, SENT
 }

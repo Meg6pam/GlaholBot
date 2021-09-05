@@ -1,6 +1,7 @@
 package com.github.meg6pam.alinkabot.telegram.command.service;
 
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.bots.AbsSender;
@@ -32,6 +33,15 @@ public abstract class ServiceCommand extends BotCommand {
     }
 
     public void sendResponse(AbsSender absSender, Long chatId, String commandName, String username, SendPhoto message) {
+        try {
+            absSender.execute(message);
+        } catch (TelegramApiException e) {
+            //TODO добавить логгер
+            e.printStackTrace();
+        }
+    }
+
+    public void sendResponse(AbsSender absSender, Long chatId, String commandName, String username, SendDocument message) {
         try {
             absSender.execute(message);
         } catch (TelegramApiException e) {

@@ -1,7 +1,8 @@
 package com.github.meg6pam.alinkabot.telegram.util;
 
-import com.github.meg6pam.alinkabot.enums.TaskStatus;
+import com.github.meg6pam.alinkabot.enums.Status;
 import com.github.meg6pam.alinkabot.model.Job;
+import com.github.meg6pam.alinkabot.model.MessageTuple;
 import com.github.meg6pam.alinkabot.model.Recipient;
 import com.github.meg6pam.alinkabot.model.Task;
 import org.postgresql.ds.PGSimpleDataSource;
@@ -155,12 +156,12 @@ public class DatabaseManager {
         return Optional.ofNullable(taskId);
     }
 
-    public static void newTask(String type, Integer authorUserId) {
+    public static void newTask(String type, Integer authorUserId, String status) {
         try (
                 Connection connection = ds.getConnection();
                 Statement statement = connection.createStatement()
         ) {
-            final String query = String.format("INSERT INTO tasks (type, status, author, creation_date) VALUES ('%s', 'DRAFT', %d, DEFAULT)", type, authorUserId);
+            final String query = String.format("INSERT INTO tasks (type, status, author, creation_date) VALUES ('%s', '%s', %d, DEFAULT)", type, status, authorUserId);
             statement.executeUpdate(query);
         } catch (SQLException throwables) {
 //            logger.error("Can't add new Task with type {} for user with id {} to database ", type, authorUserId, throwables);
@@ -201,7 +202,7 @@ public class DatabaseManager {
      * @param status of task
      * @return last task
      */
-    public static Task getLastTask(Integer userId, TaskStatus status) {
+    public static Task getLastTask(Integer userId, Status status) {
         final Task task = new Task();
         try (
                 Connection connection = ds.getConnection();
@@ -227,7 +228,7 @@ public class DatabaseManager {
         return task;
     }
 
-    public static void setTaskStatus(Integer taskId, TaskStatus status) {
+    public static void setTaskStatus(Integer taskId, Status status) {
         try (
                 Connection connection = ds.getConnection();
                 Statement statement = connection.createStatement()
@@ -335,5 +336,42 @@ public class DatabaseManager {
             throwables.printStackTrace();
         }
         return jobs;
+    }
+
+    public static Optional<MessageTuple> getCodeFileAndMessage(String codeword) {
+        MessageTuple messageTuple = null;
+        try (
+                Connection connection = ds.getConnection();
+                Statement statement = connection.createStatement()
+        ) {
+            final String query = String.format("SELECT file_id, message FROM codewords WHERE codeword = %s", codeword);
+            final ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                messageTuple = new MessageTuple();
+                messageTuple.setFileId(resultSet.getInt("file_id"));
+                messageTuple.setMessage(resultSet.getString("message"));
+            }
+        } catch (SQLException throwables) {
+//            logger.error("Can't get last Task from database ");
+            throwables.printStackTrace();
+        }
+        return Optional.ofNullable(messageTuple);
+    }
+
+    public static int newCodeword(String codeword, String fileId, String message) {
+        try (
+                Connection connection = ds.getConnection();
+                Statement statement = connection.createStatement()
+        ) {
+            final String query = String.format("INSERT INTO codewords " +
+                            "(codeword_id, codeword, file_id, message)" +
+                            " VALUES (DEFAULT, %s, %s, %s) ON CONFLICT (id) DO NOTHING", codeword, fileId, message);
+            return statement.executeUpdate(query);
+//            logger.trace("New User added to database {}", user);
+        } catch (SQLException throwables) {
+//            logger.error("Can't add User to database {}", user);
+            throwables.printStackTrace();
+        }
+        return 0;
     }
 }

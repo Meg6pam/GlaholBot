@@ -1,6 +1,7 @@
 package com.github.meg6pam.alinkabot.telegram;
 
 import com.github.meg6pam.alinkabot.model.Job;
+import com.github.meg6pam.alinkabot.model.MessageTuple;
 import com.github.meg6pam.alinkabot.telegram.command.service.CancelCommand;
 import com.github.meg6pam.alinkabot.telegram.command.service.HelpCommand;
 import com.github.meg6pam.alinkabot.telegram.command.service.MailingCommand;
@@ -12,6 +13,7 @@ import com.github.meg6pam.alinkabot.telegram.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -78,10 +80,21 @@ public final class Bot extends TelegramLongPollingCommandBot {
         String answer;
         if (DatabaseManager.getUserRole(userName).equals("ADMIN")) {
             answer = adminCommand.handleUpdate(update);
+            setAnswer(chatId, userName, answer);
         } else {
-            answer = nonCommand.execute(chatId, userName, msg.getText());
+            MessageTuple messageTuple = nonCommand.execute(msg.getText());
+            if (messageTuple.getFileId() != null && messageTuple.getFileId() != 0) {
+                SendDocument sendDocument = new SendDocument();
+                sendDocument.setDocument(new InputFile(String.valueOf(messageTuple.getFileId())));
+                sendDocument.setCaption(messageTuple.getMessage());
+                sendDocument.setChatId(String.valueOf(update.getMessage().getChatId()));
+                try {
+                    execute(sendDocument);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        setAnswer(chatId, userName, answer);
     }
 
     @Override
