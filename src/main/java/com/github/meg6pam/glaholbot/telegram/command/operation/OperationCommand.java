@@ -1,4 +1,4 @@
-package com.github.meg6pam.alinkabot.telegram.command.operation;
+package com.github.meg6pam.glaholbot.telegram.command.operation;
 
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.Chat;

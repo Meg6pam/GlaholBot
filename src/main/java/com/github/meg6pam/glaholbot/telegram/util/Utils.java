@@ -1,4 +1,4 @@
-package com.github.meg6pam.alinkabot.telegram.util;
+package com.github.meg6pam.glaholbot.telegram.util;
 
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;

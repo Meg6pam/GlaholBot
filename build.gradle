@@ -24,8 +24,8 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile'org.telegram:telegrambots:5.0.1'
-    compile 'org.telegram:telegrambotsextensions:5.0.1'
+    compile'org.telegram:telegrambots:5.3.0'
+    compile 'org.telegram:telegrambotsextensions:5.3.0'
     compile 'org.postgresql:postgresql:42.2.18'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'

@@ -1,15 +1,11 @@
-package com.github.meg6pam.alinkabot.telegram;
+package com.github.meg6pam.glaholbot.telegram;
 
-import com.github.meg6pam.alinkabot.model.Job;
-import com.github.meg6pam.alinkabot.model.MessageTuple;
-import com.github.meg6pam.alinkabot.telegram.command.service.CancelCommand;
-import com.github.meg6pam.alinkabot.telegram.command.service.HelpCommand;
-import com.github.meg6pam.alinkabot.telegram.command.service.MailingCommand;
-import com.github.meg6pam.alinkabot.telegram.command.service.PushCommand;
-import com.github.meg6pam.alinkabot.telegram.command.service.SendCommand;
-import com.github.meg6pam.alinkabot.telegram.command.service.StartCommand;
-import com.github.meg6pam.alinkabot.telegram.util.DatabaseManager;
-import com.github.meg6pam.alinkabot.telegram.util.Utils;
+import com.github.meg6pam.glaholbot.model.Job;
+import com.github.meg6pam.glaholbot.model.MessageTuple;
+import com.github.meg6pam.glaholbot.telegram.command.service.HelpCommand;
+import com.github.meg6pam.glaholbot.telegram.command.service.StartCommand;
+import com.github.meg6pam.glaholbot.telegram.util.DatabaseManager;
+import com.github.meg6pam.glaholbot.telegram.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
@@ -53,14 +49,6 @@ public final class Bot extends TelegramLongPollingCommandBot {
         logger.debug("Команда start создана");
         register(new HelpCommand("help", "Помощь"));
         logger.debug("Команда help создана");
-        register(new MailingCommand("mailing", "Рассылка"));
-        logger.debug("Команда mailing создана");
-        register(new PushCommand("push", "отправить"));
-        logger.debug("Команда push создана");
-        register(new SendCommand("send", "готово"));
-        logger.debug("Команда send создана");
-        register(new CancelCommand("cancel", "отмена"));
-        logger.debug("Команда cancel создана");
         logger.info("Бот создан!");
 
         Timer timer = new Timer();

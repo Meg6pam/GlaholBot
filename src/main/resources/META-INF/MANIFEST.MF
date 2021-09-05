@@ -1,1 +1,1 @@
-Main-Class: com.github.meg6pam.alinkabot.AlinkaBotApplication
+Main-Class: com.github.meg6pam.glaholbot.GlaholBotApplication

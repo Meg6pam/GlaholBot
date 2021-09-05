@@ -1,7 +1,7 @@
-package com.github.meg6pam.alinkabot.telegram;
+package com.github.meg6pam.glaholbot.telegram;
 
-import com.github.meg6pam.alinkabot.model.MessageTuple;
-import com.github.meg6pam.alinkabot.telegram.util.DatabaseManager;
+import com.github.meg6pam.glaholbot.model.MessageTuple;
+import com.github.meg6pam.glaholbot.telegram.util.DatabaseManager;
 
 import java.util.Optional;
 

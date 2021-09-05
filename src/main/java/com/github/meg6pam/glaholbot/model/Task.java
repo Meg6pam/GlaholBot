@@ -1,4 +1,4 @@
-package com.github.meg6pam.alinkabot.model;
+package com.github.meg6pam.glaholbot.model;
 
 import java.time.LocalDateTime;
 

@@ -1,10 +1,10 @@
-package com.github.meg6pam.alinkabot.telegram.util;
+package com.github.meg6pam.glaholbot.telegram.util;
 
-import com.github.meg6pam.alinkabot.enums.Status;
-import com.github.meg6pam.alinkabot.model.Job;
-import com.github.meg6pam.alinkabot.model.MessageTuple;
-import com.github.meg6pam.alinkabot.model.Recipient;
-import com.github.meg6pam.alinkabot.model.Task;
+import com.github.meg6pam.glaholbot.enums.Status;
+import com.github.meg6pam.glaholbot.model.Job;
+import com.github.meg6pam.glaholbot.model.MessageTuple;
+import com.github.meg6pam.glaholbot.model.Recipient;
+import com.github.meg6pam.glaholbot.model.Task;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.telegram.telegrambots.meta.api.objects.User;
 

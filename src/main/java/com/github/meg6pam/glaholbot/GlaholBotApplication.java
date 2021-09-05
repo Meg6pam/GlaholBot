@@ -1,11 +1,11 @@
-package com.github.meg6pam.alinkabot;
+package com.github.meg6pam.glaholbot;
 
-import com.github.meg6pam.alinkabot.telegram.Bot;
+import com.github.meg6pam.glaholbot.telegram.Bot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-public class AlinkaBotApplication {
+public class GlaholBotApplication {
     private final static String BOT_USERNAME = System.getenv("BOT_USERNAME");
     private final static String BOT_TOKEN = System.getenv("BOT_TOKEN");
     public static void main(String[] args) {

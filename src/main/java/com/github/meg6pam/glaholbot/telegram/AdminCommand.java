@@ -1,4 +1,4 @@
-package com.github.meg6pam.alinkabot.telegram;
+package com.github.meg6pam.glaholbot.telegram;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 

@@ -1,4 +1,4 @@
-package com.github.meg6pam.alinkabot.enums;
+package com.github.meg6pam.glaholbot.enums;
 
 public enum UserRole {
     USER, ADMIN
