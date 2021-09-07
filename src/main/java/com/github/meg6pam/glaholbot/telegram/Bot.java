@@ -11,18 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public final class Bot extends TelegramLongPollingCommandBot {
@@ -31,6 +26,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
 
     private final NonCommand nonCommand;
     private final AdminCommand adminCommand;
+    private final SendVideoCommand sendVideoCommand;
     Logger logger = LoggerFactory.getLogger(Bot.class.getName());
 
     private final String BOT_USERNAME;
@@ -45,14 +41,13 @@ public final class Bot extends TelegramLongPollingCommandBot {
         logger.debug("Класс обработки сообщения, не являющегося командой, создан");
         this.adminCommand = new AdminCommand();
         logger.debug("Класс обработки сообщений администратора, не являющегося командой, создан");
+        this.sendVideoCommand = new SendVideoCommand();
+        logger.debug("Класс отправки видеофайлов, создан");
         register(new StartCommand("start", "Старт"));
         logger.debug("Команда start создана");
         register(new HelpCommand("help", "Помощь"));
         logger.debug("Команда help создана");
         logger.info("Бот создан!");
-
-        Timer timer = new Timer();
-        timer.schedule(new JobFounder(), 0, 60 * 1000);
     }
 
     @Override
@@ -62,27 +57,11 @@ public final class Bot extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
-        Message msg = update.getMessage();
-        Long chatId = msg.getChatId();
-        String userName = Utils.getUserName(msg);
-        String answer;
-        if (DatabaseManager.getUserRole(userName).equals("ADMIN")) {
-            answer = adminCommand.handleUpdate(update);
-            setAnswer(chatId, userName, answer);
-        } else {
-            MessageTuple messageTuple = nonCommand.execute(msg.getText());
-            if (messageTuple.getFileId() != null && messageTuple.getFileId() != 0) {
-                SendDocument sendDocument = new SendDocument();
-                sendDocument.setDocument(new InputFile(String.valueOf(messageTuple.getFileId())));
-                sendDocument.setCaption(messageTuple.getMessage());
-                sendDocument.setChatId(String.valueOf(update.getMessage().getChatId()));
-                try {
-                    execute(sendDocument);
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        final Message msg = update.getMessage();
+        final Long chatId = msg.getChatId();
+        final String userName = Utils.getUserName(msg);
+        final String answer = sendVideoCommand.handleUpdate(update);
+        setAnswer(chatId, userName, answer);
     }
 
     @Override
@@ -109,56 +88,4 @@ public final class Bot extends TelegramLongPollingCommandBot {
             e.printStackTrace();
         }
     }
-
-    public void handleJobs() {
-        Thread thread = new Thread(() -> {
-            while (true) {
-                List<Job> completedJobs = new ArrayList<>();
-                jobThreads.forEach(job -> {
-                    if (job.getFileId() != null && job.getFileId() != 0) {
-                        SendPhoto msg = new SendPhoto();
-                        msg.setPhoto(new InputFile(String.valueOf(job.getFileId())));
-                        msg.setChatId(job.getChatId().toString());
-                        try {
-                            execute(msg);
-                        } catch (TelegramApiException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (job.getMessage() != null && !job.getMessage().isEmpty()) {
-                        SendMessage answer = new SendMessage();
-                        answer.setText(job.getMessage());
-                        answer.setChatId(job.getChatId().toString());
-                        try {
-                            execute(answer);
-                        } catch (TelegramApiException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    completedJobs.add(job);
-                    DatabaseManager.deleteJob(job.getJobId());
-                });
-                jobThreads.removeAll(completedJobs);
-                try {
-                    Thread.sleep(60 * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    continue;
-                }
-            }
-        }
-        );
-
-        thread.start();
-
-    }
-
-    private static class JobFounder extends TimerTask {
-        @Override
-        public void run() {
-            List<Job> jobs = DatabaseManager.getAllJobs();
-            jobThreads.addAll(jobs);
-        }
-    }
-
 }
